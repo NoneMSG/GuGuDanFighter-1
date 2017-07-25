@@ -1,4 +1,4 @@
-package com.estsoft.gugudanfighter;
+package com.jx372.gugudanfighter;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -112,7 +112,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         final int answerCount = answerButtons.length;
 
         // 답 과 문제 세팅을 위한 랜덤 순서
-        int randomOrderAnswer = randomize(0, answerCount );
+        int randomOrderAnswer = randomize(0, answerCount-1 );
 
         // 세팅된 답 배열 ( 중복 체크을 위해서 )
         int[] answers = new int[answerCount];
@@ -165,7 +165,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         public void run() {
-            if (seconds >= TIME_LIMITS) {
+            if (++seconds >= TIME_LIMITS) {
                 // 게임 종료
                 timer.cancel();
 
@@ -179,6 +179,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 return;
             }
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    updateLastTime( TIME_LIMITS - seconds );
+                }
+            });
         }
     }
 }

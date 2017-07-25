@@ -1,4 +1,4 @@
-package com.estsoft.gugudanfighter;
+package com.jx372.gugudanfighter;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
